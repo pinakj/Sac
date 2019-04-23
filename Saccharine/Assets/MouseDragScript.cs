@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MouseDragScript : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class MouseDragScript : MonoBehaviour
     private Vector3 offset;
 
     private int points;
+
+    public Text score;
+    private int scorefortext;
+
+    public Text combo;
+    private int combofortext;
 
     private float timer = 30f;
 
@@ -22,18 +29,33 @@ public class MouseDragScript : MonoBehaviour
     public GameObject answer3;
     public GameObject answer4;
 
+    public ParticleSystem pSystem;
+
     public GameObject candy1;
     public GameObject candy2;
     public GameObject candy3;
     public GameObject candy4;
     public Text text;
+    public GameObject result;
+    public GameObject cross;
     List<string> childs;
     void Start()
     {
-
+        scorefortext = 0;
+        combofortext = 0;
+        result.SetActive(false);
+        cross.SetActive(false);
         mo = orderManager.GetComponent<ManageOrders>();
         points = 0;
         childs = new List<string>();
+    }
+
+    IEnumerator HandleText()
+    {
+        yield return new WaitForSeconds(0.5f);
+        result.SetActive(false);
+        cross.SetActive(false);
+        pSystem.gameObject.SetActive(false);
     }
     void checkAnswer()
     {
@@ -56,7 +78,22 @@ public class MouseDragScript : MonoBehaviour
 
         if ((childs[0] == tempMO1[0] && childs[1] == tempMO1[1] && childs[2] == tempMO1[2] && childs[3] == tempMO1[3]) )
         {
+            result.GetComponent<Text>().text = "PERFECT!!!!";
+            result.SetActive(true);
+            pSystem.gameObject.SetActive(true);
+
+            pSystem.Play();
             Debug.Log("perf");
+            combofortext += 1;
+            if(combofortext > 0)
+            {
+                scorefortext += (10) * combofortext;
+
+            }
+            else
+            {
+                scorefortext += 10;
+            }
             foreach (Transform child in answer1.transform)
             {
                 Destroy(child.gameObject);
@@ -78,9 +115,18 @@ public class MouseDragScript : MonoBehaviour
             timer += 2.5f;
 
             mo.makeInitialOrders("1");
+            StartCoroutine(HandleText());
+
         }
         else if ((childs[0] == tempMO2[0] && childs[1] == tempMO2[1] && childs[2] == tempMO2[2] && childs[3] == tempMO2[3]))
         {
+            result.GetComponent<Text>().text = "PERFECT!!!!";
+            result.SetActive(true);
+            pSystem.gameObject.SetActive(true);
+
+            pSystem.Play();
+
+
             Debug.Log("perf");
             foreach (Transform child in answer1.transform)
             {
@@ -100,14 +146,44 @@ public class MouseDragScript : MonoBehaviour
             }
             childs.Clear();
             timer += 2.5f;
+            combofortext += 1;
+
+            if (combofortext > 0)
+            {
+                scorefortext += (10) * combofortext;
+
+            }
+            else
+            {
+                scorefortext += 10;
+            }
+
 
             mo.makeInitialOrders("2");
 
+            StartCoroutine(HandleText());
 
         }
         else if ((childs[0] == tempMO3[0] && childs[1] == tempMO3[1] && childs[2] == tempMO3[2] && childs[3] == tempMO3[3]))
         {
+            result.GetComponent<Text>().text = "PERFECT!!!!";
+            result.SetActive(true);
+            pSystem.gameObject.SetActive(true);
+            pSystem.Play();
+
+
             Debug.Log("perf");
+            combofortext += 1;
+            if (combofortext > 0)
+            {
+                scorefortext += (10) * combofortext;
+
+            }
+            else
+            {
+                scorefortext += 10;
+            }
+
             foreach (Transform child in answer1.transform)
             {
                 Destroy(child.gameObject);
@@ -128,6 +204,7 @@ public class MouseDragScript : MonoBehaviour
             timer += 2.5f;
 
             mo.makeInitialOrders("3");
+            StartCoroutine(HandleText());
 
         }
         else
@@ -150,7 +227,21 @@ public class MouseDragScript : MonoBehaviour
 
             if (isTrue == true && cnt == 4)
             {
+                result.GetComponent<Text>().text = "OK";
+                result.SetActive(true);
                 print("is pk");
+                combofortext += 1;
+
+                if (combofortext > 0)
+                {
+                    scorefortext += (10) * combofortext;
+
+                }
+                else
+                {
+                    scorefortext += 10;
+                }
+
                 foreach (Transform child in answer1.transform)
                 {
                     Destroy(child.gameObject);
@@ -171,6 +262,7 @@ public class MouseDragScript : MonoBehaviour
                 timer += 0.5f;
 
                 mo.makeInitialOrders("1");
+                StartCoroutine(HandleText());
 
 
             }
@@ -193,6 +285,20 @@ public class MouseDragScript : MonoBehaviour
                 if (isTrue == true && cnt2 == 4)
                 {
                     print("is pk");
+                    result.GetComponent<Text>().text = "OK";
+                    combofortext += 1;
+
+                    if (combofortext > 0)
+                    {
+                        scorefortext += (10) * combofortext;
+
+                    }
+                    else
+                    {
+                        scorefortext += 10;
+                    }
+
+                    result.SetActive(true);
                     foreach (Transform child in answer1.transform)
                     {
                         Destroy(child.gameObject);
@@ -213,6 +319,7 @@ public class MouseDragScript : MonoBehaviour
                     timer += 0.5f;
 
                     mo.makeInitialOrders("2");
+                    StartCoroutine(HandleText());
 
                 }
 
@@ -234,6 +341,20 @@ public class MouseDragScript : MonoBehaviour
                     if (isTrue == true && cnt3 == 4)
                     {
                         print("is pk");
+                        result.GetComponent<Text>().text = "OK";
+                        combofortext += 1;
+
+                        if (combofortext > 0)
+                        {
+                            scorefortext += (10) * combofortext;
+
+                        }
+                        else
+                        {
+                            scorefortext += 10;
+                        }
+
+                        result.SetActive(true);
                         foreach (Transform child in answer1.transform)
                         {
                             Destroy(child.gameObject);
@@ -254,12 +375,25 @@ public class MouseDragScript : MonoBehaviour
                         timer += 0.5f;
 
                         mo.makeInitialOrders("3");
+                        StartCoroutine(HandleText());
 
                     }
 
                     else
                     {
+                        combofortext = 0;
+                        if(scorefortext >=25)
+                        {
+                            scorefortext -= 25;
+
+                        }
+                        else
+                        {
+                            scorefortext = 0;
+                        }
                         print("Fail");
+                        cross.SetActive(true);
+                        StartCoroutine(HandleText());
                         childs.Clear();
                         timer -= 1.5f;
 
@@ -526,6 +660,14 @@ public class MouseDragScript : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            removeThis();
+        }
+
+        score.text = "Score: "+scorefortext.ToString();
+        combo.text = "Combo: " + combofortext.ToString();
 
     }
 
