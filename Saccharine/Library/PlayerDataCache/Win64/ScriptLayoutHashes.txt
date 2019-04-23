@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Pinak Jalan/Documents/Sac/Build/Saccharine.exe
+C:/Users/u0965201/Desktop/Test/Saccharine.exe
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?

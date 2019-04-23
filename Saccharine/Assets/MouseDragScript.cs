@@ -292,6 +292,43 @@ public class MouseDragScript : MonoBehaviour
 
 
     }
+
+    public void removeThis()
+    {
+        childs.RemoveAt(childs.Count-1);
+        if(answer4.transform.childCount > 0)
+        {
+            foreach (Transform child in answer4.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+        else if(answer3.transform.childCount > 0)
+        {
+            foreach (Transform child in answer3.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            print("Third spot is occupied");
+        }
+        else if(answer2.transform.childCount > 0)
+        {
+            foreach (Transform child in answer2.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            print("Second spot is occupied");
+        }
+        else if(answer1.transform.childCount > 0)
+        {
+            foreach (Transform child in answer1.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            print("First spot is occupied");
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
